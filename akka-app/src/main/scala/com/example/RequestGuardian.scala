@@ -20,11 +20,12 @@ object RequestGuardian {
 
   final case class ProgressReport(progress: Int)
 
-  def apply(): Behavior[Command] = Behaviors.receive {
-    (context, message) => {
-      print(message)
+  def apply(): Behavior[Command] = Behaviors.receiveMessage {
+    case GetAllUserReviews(apiKey, replyTo) =>
+      replyTo ! UserReviews(List("aaa", "bbb"))
       Behaviors.same
-    }
-
+    case GetCurrentProgress(apiKey, replyTo) =>
+      replyTo ! ProgressReport(10)
+      Behaviors.same
   }
 }

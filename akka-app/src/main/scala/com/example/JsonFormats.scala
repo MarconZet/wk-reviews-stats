@@ -1,17 +1,14 @@
 package com.example
 
-import com.example.UserRegistry.ActionPerformed
-
-//#json-formats
+import com.example.RequestGuardian.{ProgressReport, UserReviews}
+import spray.json.RootJsonFormat
 import spray.json.DefaultJsonProtocol
 
-object JsonFormats  {
-  // import the default encoders for primitive types (Int, String, Lists etc)
+object JsonFormats {
+
   import DefaultJsonProtocol._
 
-  implicit val userJsonFormat = jsonFormat3(User)
-  implicit val usersJsonFormat = jsonFormat1(Users)
-
-  implicit val actionPerformedJsonFormat = jsonFormat1(ActionPerformed)
+  implicit val apiKeyJson: RootJsonFormat[ApiKey] = jsonFormat1(ApiKey)
+  implicit val userReviewsJson: RootJsonFormat[UserReviews] = jsonFormat1(UserReviews)
+  implicit val progressReportJson: RootJsonFormat[ProgressReport] = jsonFormat1(ProgressReport)
 }
-//#json-formats
